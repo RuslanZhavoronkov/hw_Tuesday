@@ -1,35 +1,81 @@
 .greetingForm {
+    background-color: rgb(203, 223, 216);
+    width: 200px;
+    margin-top: 5px;
 }
 
 .inputAndButtonContainer {
+    background-color: rgb(247, 202, 197)
 }
 
 .error {
+    background-color: rgb(247, 133, 133);
+    text-align: center;
 }
 
 .input {
+    font-family: inherit;/* 1 */
+    font-size: inherit;/* 1 */
+    line-height: inherit;
+    margin: 0 auto;
+    display: block;
 }
 
 .input:focus {
+    color: #212529;
+    background-color: #f0e4e4;
+    border-color: #07a6f0;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
+    margin: 0 auto;
+    display: block;
 }
 
 .errorInput {
+    color: #212529;
+    background-color: #f3d4d4;
+    border-color: #bdbdbd;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25);
+    margin: 0 auto;
+    display: block;
 }
 
 .button {
+    background-color: #f2f7f2; /* Green */
+    border: 2px solid #4CAF50;
+    border-radius: 8px;
+    color: rgb(8, 0, 0);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0 auto;
+    display: block;
 }
 
 .button:focus {
+    background-color: #4CAF50; /* Green */
+    color: white;
 }
 
 .button:active {
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
 }
 
 .button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
 .text {
+    background-color: #b2ecb3;
+   text-align: center;
 }
 
 .greeting {
-}
+    background-color: rgb(205, 218, 230);
+    margin: 0 auto;
+    display: block;}
