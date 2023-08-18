@@ -1,8 +1,11 @@
 .burgerMenuIcon {
+    background-color: rgb(255, 0, 149);
 }
 
 .header {
+    background-color: grey;
 }
 
 .header h1 {
+    background-color: aqua;
 }
