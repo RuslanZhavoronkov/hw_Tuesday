@@ -1,8 +1,8 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import s2 from '../../s1-main/App.module.css'
 import s from './HW13.module.css'
 import SuperButton from '../hw04/common/c2-SuperButton/SuperButton'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import success200 from './images/200.svg'
 import error400 from './images/400.svg'
 import error500 from './images/500.svg'
@@ -20,6 +20,7 @@ const HW13 = () => {
     const [info, setInfo] = useState('')
     const [image, setImage] = useState('')
 
+
     const send = (x?: boolean | null) => () => {
         const url =
             x === null
@@ -32,18 +33,53 @@ const HW13 = () => {
         setInfo('...loading')
 
         axios
-            .post(url, {success: x})
+            .post(url, { success: x })
             .then((res) => {
-                setCode('Код 200!')
-                setImage(success200)
-                // дописать
+                debugger
+                if (x) {
+                    setImage(success200)
+                    setCode('Код 200!')
+                    setText(res.data.errorText)
+                    setInfo(res.data.info)
+                }
 
             })
             .catch((e) => {
+                debugger
+                // дописать
+                // const textError = e.response
+                //     ? (e.response.data as ({ errorText: string })).errorText : e.message
+                // const textInfo = e.response
+                //     ? (e.response.data as ({ info: string })).info : e.message
+
+                const textError = e.response?.data?.errorText || e.message
+                const textInfo = e.response?.data?.info || e.name
+
+                if (!x) {
+                    setImage(error500)
+                    setCode('Ошибка 500!')
+                    setText(textError)
+                    setInfo(textInfo)
+                }
                 // дописать
 
+                if (x === undefined) {
+
+                    setImage(error400)
+                    setCode('Ошибка 400!')
+                    setText(textError)
+                    setInfo(textInfo)
+                }
+
+                if (x === null) {
+                    setImage(errorUnknown)
+                    setCode('Error!')
+                    setText(e.message)
+                    setInfo(e.name)
+                }
             })
-    }
+
+        }
 
     return (
         <div id={'hw13'}>
@@ -56,6 +92,7 @@ const HW13 = () => {
                         onClick={send(true)}
                         xType={'secondary'}
                         // дописать
+                        disabled={info === '...loading'}
 
                     >
                         Send true
@@ -65,6 +102,7 @@ const HW13 = () => {
                         onClick={send(false)}
                         xType={'secondary'}
                         // дописать
+                        disabled={info === '...loading'}
 
                     >
                         Send false
@@ -74,6 +112,7 @@ const HW13 = () => {
                         onClick={send(undefined)}
                         xType={'secondary'}
                         // дописать
+                        disabled={info === '...loading'}
 
                     >
                         Send undefined
@@ -83,6 +122,7 @@ const HW13 = () => {
                         onClick={send(null)} // имитация запроса на не корректный адрес
                         xType={'secondary'}
                         // дописать
+                        disabled={info === '...loading'}
 
                     >
                         Send null
@@ -91,7 +131,7 @@ const HW13 = () => {
 
                 <div className={s.responseContainer}>
                     <div className={s.imageContainer}>
-                        {image && <img src={image} className={s.image} alt="status"/>}
+                        {image && <img src={image} className={s.image} alt="status" />}
                     </div>
 
                     <div className={s.textContainer}>
