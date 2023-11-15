@@ -21,18 +21,14 @@ type TechType = {
     developer: string
 }
 
-type ParamsType = {
+ export type ParamsType = {
     sort?: string
     page: number | string
     count: number | string
 }
 
 //Query
-type QueryParamsType = {
-    page: string | undefined
-    count: string | undefined
-    
-}
+
 
 const getTechs = (params: ParamsType) => {
     return axios
