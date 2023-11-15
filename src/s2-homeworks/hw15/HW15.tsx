@@ -22,9 +22,16 @@ type TechType = {
 }
 
 type ParamsType = {
-    sort: string
-    page: number
-    count: number
+    sort?: string
+    page: number | string
+    count: number | string
+}
+
+//Query
+type QueryParamsType = {
+    page: string | undefined
+    count: string | undefined
+    
 }
 
 const getTechs = (params: ParamsType) => {
@@ -40,21 +47,20 @@ const getTechs = (params: ParamsType) => {
 
 const HW15 = () => {
     const [sort, setSort] = useState('')
-    const [page, setPage] = useState(1)
-    const [count, setCount] = useState(4)
+    const [page, setPage] = useState(1) //номер выбранной страницы
+    const [count, setCount] = useState(4)//кол-во строк в столбце
     const [idLoading, setLoading] = useState(false)
     const [totalCount, setTotalCount] = useState(100)
     const [searchParams, setSearchParams] = useSearchParams()
     const [techs, setTechs] = useState<TechType[]>([])
 
-    const sendQuery = (params: any) => {
+    const sendQuery = (params: ParamsType) => {
         setLoading(true)
         getTechs(params)
             .then((res) => {
                 // делает студент
-
                 // сохранить пришедшие данные
-
+               setTechs(techs)
                 //
             })
     }
@@ -63,11 +69,15 @@ const HW15 = () => {
         // делает студент
 
         // setPage(
+            setPage(newPage)
         // setCount(
+            setCount(newCount)
 
         // sendQuery(
+            sendQuery({page: newPage, count: newCount})
         // setSearchParams(
-
+           
+            setSearchParams()
         //
     }
 
@@ -79,7 +89,7 @@ const HW15 = () => {
 
         // sendQuery(
         // setSearchParams(
-
+            setSearchParams()
         //
     }
 
@@ -135,3 +145,7 @@ const HW15 = () => {
 }
 
 export default HW15
+function serializeFormQuery(target: EventTarget | null) {
+    throw new Error('Function not implemented.')
+}
+
