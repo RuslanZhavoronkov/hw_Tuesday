@@ -7,7 +7,7 @@ import {ParamsType} from "../../HW15";
 export type SuperPaginationPropsType = {
   id?: string;
   page: number;
-  itemsCountForPage: number;
+  itemsCountForPage: number;// кол-во строк в столбце
   totalCount: number;
   onChange: (page: number, count: any) => void;
 };
@@ -22,19 +22,23 @@ const SuperPagination: React.FC<SuperPaginationPropsType> = ({
   //const lastPage = 10 // пишет студент // вычислить количество страниц
   const lastPage = Math.ceil(totalCount / itemsCountForPage);
 
-//   const onChangeCallback = (event: ParamsType, page: number) => {
-//     // пишет студент
-//     onChange(page, event.count);
-//   };
+  //   const onChangeCallback = (event: ParamsType, page: number) => {
+  //     // пишет студент
+  //     onChange(page, event.count);
+  //   };
 
-const onChangeCallback = (event:ChangeEvent<unknown>, page:number) => {
-
-}
+  const onChangeCallback = (event: ChangeEvent<unknown>, page: number) => {
+    alert("Hello number Portion");
+    
+  };
 
   const onChangeSelect = (event: ChangeEvent<HTMLSelectElement>) => {
     // пишет студент
-    const count = parseInt(event.target.value);
-    onChange(page, count);
+    alert("Hello Select");
+    onChange(lastPage, event.currentTarget.value)
+    console.log(event)
+    // const count = parseInt(event.target.value);
+    // onChange(page, count);
   };
 
   return (

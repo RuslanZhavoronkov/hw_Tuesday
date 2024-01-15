@@ -46,8 +46,8 @@ const HW15 = () => {
   const [count, setCount] = useState(4); //кол-во строк в столбце
   const [idLoading, setLoading] = useState(false);
   const [totalCount, setTotalCount] = useState(100);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [techs, setTechs] = useState<TechType[]>([]);
+  const [searchParams, setSearchParams] = useSearchParams();//сохраняем данные из строки запроса
+  const [techs, setTechs] = useState<TechType[]>([]); //данные с сервера
 
   const sendQuery = (params: ParamsType) => {
     setLoading(true);
