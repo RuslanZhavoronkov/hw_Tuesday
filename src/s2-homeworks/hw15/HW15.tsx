@@ -47,9 +47,16 @@ const HW15 = () => {
   const [idLoading, setLoading] = useState(false);
   const [totalCount, setTotalCount] = useState(100);
   const [searchParams, setSearchParams] = useSearchParams();//сохраняем данные из строки запроса
+
+  // searchParams - это объект URLSearchParams, который содержит параметры поискового запроса из текущего URL.
+  // setSearchParams - это функция, которую вы можете использовать для обновления параметров поискового запроса и соответствующего URL.
+
   const [techs, setTechs] = useState<TechType[]>([]); //данные с сервера
 
   const sendQuery = (params: ParamsType) => {
+    const query = searchParams.get('page')
+    setSearchParams({page:params.page})
+    console.log(query)
     setLoading(true);
     getTechs(params).then((res) => {
       //  debugger
@@ -61,6 +68,7 @@ const HW15 = () => {
     });
   };
 
+  
   const onChangePagination = (newPage: number, newCount: number) => {
     // делает студент
 
@@ -72,7 +80,7 @@ const HW15 = () => {
     // sendQuery(
     sendQuery({page: newPage, count: newCount});
     // setSearchParams(
-
+    
     setSearchParams();
     //
   };
