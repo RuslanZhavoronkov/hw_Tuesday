@@ -54,9 +54,8 @@ const HW15 = () => {
   const [techs, setTechs] = useState<TechType[]>([]); //данные с сервера
 
   const sendQuery = (params: ParamsType) => {
-    const query = searchParams.get('page')
-    setSearchParams({page:params.page})
-    console.log(query)
+   
+    
     setLoading(true);
     getTechs(params).then((res) => {
       //  debugger
@@ -64,8 +63,12 @@ const HW15 = () => {
       // сохранить пришедшие данные
       if (res) {
         setTechs(res.data.techs);
+        setTotalCount(res.data.totalCount);
       }
-    });
+    })
+    .finally(() => {
+      setLoading(false);
+    })
   };
 
   
@@ -76,24 +79,40 @@ const HW15 = () => {
     setPage(newPage);
     // setCount(
     setCount(newCount);
-
     // sendQuery(
-    sendQuery({page: newPage, count: newCount});
+      sendQuery({
+        sort,
+        page: newPage,
+        count: newCount,
+      });
+  
     // setSearchParams(
+      setSearchParams({
+        page: newPage.toString(),
+        count: newCount.toString(),
+      });
     
-    setSearchParams();
-    //
   };
 
-  const onChangeSort = (newSort: string) => {
-    // делает студент
+  const onChangeSort = (newSort: string) => { 
+    // // делает студент
 
-    // setSort(
-    // setPage(1) // при сортировке сбрасывать на 1 страницу
-
-    // sendQuery(
-    // setSearchParams(
-    setSearchParams();
+    // // setSort(
+      setSort(newSort);
+    // // setPage(1) // при сортировке сбрасывать на 1 страницу
+    setPage(1)
+    // // sendQuery(
+      sendQuery({
+        sort: newSort,
+        page: 1,
+        count,
+      });
+    // // setSearchParams(
+      setSearchParams({
+        sort: newSort,
+        page: '1',
+        count: count.toString(),
+      });
     //
   };
 
