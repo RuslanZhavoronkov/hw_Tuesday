@@ -26,19 +26,16 @@ const SuperPagination: React.FC<SuperPaginationPropsType> = ({
   //     // пишет студент
   //     onChange(page, event.count);
   //   };
+  const onChangeCallback = (event: any, page: number) => {
+    onChange(page, itemsCountForPage)
+}
 
-  const onChangeCallback = (event: ChangeEvent<unknown>, page: number) => {
-    alert("Hello number Portion");
-    
-  };
+ 
 
   const onChangeSelect = (event: ChangeEvent<HTMLSelectElement>) => {
     // пишет студент
-    alert("Hello Select");
-    onChange(lastPage, event.currentTarget.value)
-    console.log(event)
-    // const count = parseInt(event.target.value);
-    // onChange(page, count);
+    const count = parseInt(event.target.value)
+    onChange(page, count)
   };
 
   return (
