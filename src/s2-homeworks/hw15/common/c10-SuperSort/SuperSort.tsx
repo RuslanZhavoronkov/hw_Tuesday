@@ -1,12 +1,9 @@
-import React from 'react';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
-import HeightSharpIcon from '@mui/icons-material/HeightSharp';
+import React from 'react'
 
 // добавить в проект иконки и импортировать
-const downIcon = <ArrowDropDownIcon fontSize={'small'}/>
-const upIcon = <ArrowDropUpIcon fontSize={'small'}/>
-const noneIcon = <HeightSharpIcon fontSize={'small'}/>
+const downIcon = '[\\/]'
+const upIcon = '[/\\]'
+const noneIcon = '[--]'
 
 export type SuperSortPropsType = {
     id?: string
@@ -17,8 +14,10 @@ export type SuperSortPropsType = {
 
 export const pureChange = (sort: string, down: string, up: string) => {
     // пишет студент, sort: (click) => down (click) => up (click) => '' (click) => down ...
-    return sort === '' ? down : sort === down ? up : sort === up ? '' : down
+    // return down // исправить
+    return sort === down ? up : down
 }
+
 
 const SuperSort: React.FC<SuperSortPropsType> = (
     {
@@ -56,13 +55,18 @@ const SuperSort: React.FC<SuperSortPropsType> = (
 
 export default SuperSort
 //________________________________________________________________________________________________________________________________________
-// import React from "react";
-// import s from "./../../HW15.module.css";
+
+
+// import React from 'react';
+// import s from './../../HW15.module.css'
+// import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+// import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+// import HeightSharpIcon from '@mui/icons-material/HeightSharp';
 
 // // добавить в проект иконки и импортировать
-// const downIcon = "[\\/]";
-// const upIcon = "[/\\]";
-// const noneIcon = "[--]";
+// const downIcon = <ArrowDropDownIcon fontSize={'small'}/>
+// const upIcon = <ArrowDropUpIcon fontSize={'small'}/>
+// const noneIcon = <HeightSharpIcon fontSize={'small'}/>
 
 // export type SuperSortPropsType = {
 //   id?: string;
