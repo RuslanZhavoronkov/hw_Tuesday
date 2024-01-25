@@ -1,132 +1,56 @@
-import React from "react";
-
-// добавить в проект иконки и импортировать
-const downIcon = "[\\/]";
-const upIcon = "[/\\]";
-const noneIcon = "[--]";
+import { FC } from 'react'
+import downIcon from '../../../../assets/downIcon.svg'
+import upIcon from '../../../../assets/upIcon.svg'
+import noneIcon from '../../../../assets/noneIcon.svg'
 
 export type SuperSortPropsType = {
-  id?: string;
-  sort: string;
-  value: string;
-  onChange: (newSort: string) => void;
-};
+    id?: string
+    sort: string
+    value: string
+    onChange: (newSort: string) => void
+}
 
 export const pureChange = (sort: string, down: string, up: string) => {
-  // пишет студент, sort: (click) => down (click) => up (click) => '' (click) => down ...
-  //return up // исправить
-  switch (sort) {
-    case down:
-      return up;
-    case up:
-      return "";
-    default:
-      return down;
-  }
-};
+    switch (sort) {
+        case (down):
+            return up
+        case (up):
+            return ''
+        default:
+            return down
+    }
+}
 
-const SuperSort: React.FC<SuperSortPropsType> = ({
-  sort,
-  value,
-  onChange,
-  id = "hw15",
-}) => {
-  const up = "0" + value;
-  const down = "1" + value;
+const SuperSort: FC<SuperSortPropsType> = (
+    {
+        sort, value, onChange, id = 'hw15',
+    }
+) => {
+    const up = '0' + value
+    const down = '1' + value
 
-  const onChangeCallback = () => {
-    onChange(pureChange(sort, down, up));
-  };
+    const onChangeCallback = () => {
+        onChange(pureChange(sort, down, up))
+    }
 
-  const icon = sort === down ? downIcon : sort === up ? upIcon : noneIcon;
+    const icon = sort === down
+        ? downIcon
+        : sort === up
+            ? upIcon
+            : noneIcon
 
-  return (
-    <span id={id + "-sort-" + value} onClick={onChangeCallback}>
-      <img
-        id={id + "-icon-" + sort}
-        src={icon}
-        style={{
-          width: "12px",
-          height: "12px",
-        }}
-      />
+    return (
+        <span
+            id={id + '-sort-' + value}
+            onClick={onChangeCallback}
+        >
+            <img
+                id={id + '-icon-' + sort}
+                src={icon}
+                alt="sort"
+            />
+        </span>
+    )
+}
 
-      {/*сделать иконку*/}
-      {/*<img*/}
-      {/*    id={id + '-icon-' + sort}*/}
-      {/*    src={icon}*/}
-      {/*/>*/}
-      {/* {icon}  */}
-      {/*а это убрать*/}
-    </span>
-  );
-};
-
-export default SuperSort;
-
-//________________________________________________________________________________________________________________________________________
-
-// import React from 'react';
-// import s from './../../HW15.module.css'
-// import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-// import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
-// import HeightSharpIcon from '@mui/icons-material/HeightSharp';
-
-// // добавить в проект иконки и импортировать
-// const downIcon = <ArrowDropDownIcon fontSize={'small'}/>
-// const upIcon = <ArrowDropUpIcon fontSize={'small'}/>
-// const noneIcon = <HeightSharpIcon fontSize={'small'}/>
-
-// export type SuperSortPropsType = {
-//   id?: string;
-//   sort: string;
-//   value: string;
-//   onChange: (newSort: string) => void;
-// };
-
-// export const pureChange = (sort: string, down: string, up: string) => {
-//   // пишет студент, sort: (click) => down (click) => up (click) => '' (click) => down ...
-//   if (sort === "" || sort === down) {
-//     return up;
-//   } else if (sort === up) {
-//     return "";
-//   } else {
-//     return down;
-//   }
-// };
-
-// const SuperSort: React.FC<SuperSortPropsType> = ({
-//   sort,
-//   value,
-//   onChange,
-//   id = "hw15",
-// }) => {
-//   const up = "0" + value;
-//   const down = "1" + value;
-
-//   const onChangeCallback = () => {
-//     onChange(pureChange(sort, down, up));
-//   };
-
-//   const icon = sort === down ? downIcon : sort === up ? upIcon : noneIcon;
-
-//   return (
-//     <span id={id + "-sort-" + value} onClick={onChangeCallback}>
-//         <div >
-//         <img
-//         className = {s.icon}
-//         id={id + '-icon-' + sort}
-//         src='https://e7.pngegg.com/pngimages/351/361/png-clipart-computer-icons-bubble-sort-sorting-algorithm-arrow-arrow-angle-text.png' />
-//         </div>
-
-//       {/*сделать иконку*/}
-//       {/*<img*/}
-//       {/*    id={id + '-icon-' + sort}*/}
-//       {/*    src={icon}*/}
-//       {/*/>*/}
-//       { /*{icon} а это убрать*/}
-//     </span>
-//   );
-// };
-
-// export default SuperSort;
+export default SuperSort
