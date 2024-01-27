@@ -1,7 +1,6 @@
-import { FC, ChangeEvent } from 'react'
+import React from 'react'
 import SuperSelect from '../../../hw07/common/c5-SuperSelect/SuperSelect'
-import Pagination from '@mui/material/Pagination'
-import PaginationItem from '@mui/material/PaginationItem'
+import { Pagination } from '@mui/material'
 import s from './SuperPagination.module.css'
 
 export type SuperPaginationPropsType = {
@@ -12,40 +11,36 @@ export type SuperPaginationPropsType = {
     onChange: (page: number, count: number) => void
 }
 
-const SuperPagination: FC<SuperPaginationPropsType> = (
+const SuperPagination: React.FC<SuperPaginationPropsType> = (
     {
         page, itemsCountForPage, totalCount, onChange, id = 'hw15',
     }
 ) => {
     const lastPage = Math.ceil(totalCount / itemsCountForPage)
 
-    const onChangeCallback = (event: ChangeEvent<unknown>, page: number) => {
-        onChange(page, itemsCountForPage)
+    const onChangeCallback = (event: any, page: number) => {
+
+        if (typeof event === 'number') {
+            onChange(page, event)
+        } else {
+            onChange(page, itemsCountForPage)
+        }
     }
 
-    const onChangeSelect = (event: ChangeEvent<HTMLSelectElement>) => {
-        onChange(page, Number(event.currentTarget.value))
+    const onChangeSelect = (event: any) => {
+        onChangeCallback(event, page);
     }
 
     return (
         <div className={s.pagination}>
             <Pagination
                 id={id + '-pagination'}
+                sx={{}}
                 page={page}
                 count={lastPage}
                 onChange={onChangeCallback}
-                color="primary"
-                shape="rounded"
                 hideNextButton
                 hidePrevButton
-                renderItem={(item) => (
-                    <PaginationItem
-                        {...item}
-                        sx={{
-                            fontSize: '1.4rem',
-                        }}
-                    />
-                )}
             />
 
             <span className={s.text1}>
@@ -56,11 +51,11 @@ const SuperPagination: FC<SuperPaginationPropsType> = (
                 id={id + '-pagination-select'}
                 value={itemsCountForPage}
                 options={[
-                    { id: 4, value: 4 },
-                    { id: 7, value: 7 },
-                    { id: 10, value: 10 },
+                    {id: 4, value: '4'},
+                    {id: 7, value: '7'},
+                    {id: 10, value: '10'},
                 ]}
-                onChange={onChangeSelect}
+                onChangeOption={onChangeSelect}
             />
 
             <span className={s.text2}>

@@ -1,7 +1,8 @@
-import { FC } from 'react'
-import downIcon from '../../../../assets/downIcon.svg'
-import upIcon from '../../../../assets/upIcon.svg'
-import noneIcon from '../../../../assets/noneIcon.svg'
+import React from 'react'
+
+const downIcon = "https://img.icons8.com/material-two-tone/24/expand-arrow--v1.png"
+const upIcon = "https://img.icons8.com/material-outlined/24/collapse-arrow.png"
+const noneIcon = "https://img.icons8.com/material-outlined/24/000000/sort.png"
 
 export type SuperSortPropsType = {
     id?: string
@@ -11,17 +12,17 @@ export type SuperSortPropsType = {
 }
 
 export const pureChange = (sort: string, down: string, up: string) => {
-    switch (sort) {
-        case (down):
-            return up
-        case (up):
-            return ''
-        default:
-            return down
+    if (sort === '') {
+        sort = down;
+    } else if (sort === down) {
+        sort = up;
+    } else if (sort === up) {
+        sort = '';
     }
+    return sort
 }
 
-const SuperSort: FC<SuperSortPropsType> = (
+const SuperSort: React.FC<SuperSortPropsType> = (
     {
         sort, value, onChange, id = 'hw15',
     }
@@ -30,7 +31,8 @@ const SuperSort: FC<SuperSortPropsType> = (
     const down = '1' + value
 
     const onChangeCallback = () => {
-        onChange(pureChange(sort, down, up))
+        const newSortValue = pureChange(sort, down, up);
+        onChange(newSortValue);
     }
 
     const icon = sort === down
@@ -44,10 +46,9 @@ const SuperSort: FC<SuperSortPropsType> = (
             id={id + '-sort-' + value}
             onClick={onChangeCallback}
         >
-            <img
-                id={id + '-icon-' + sort}
-                src={icon}
-                alt="sort"
+            <img width="18" height="18"
+                 id={id + '-icon-' + sort}
+                 src={icon} alt='Icons by sort'
             />
         </span>
     )
